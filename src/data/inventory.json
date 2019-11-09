@@ -1,0 +1,70 @@
+{
+    "inventory": [
+      {
+        "id":"1",
+        "name": "Apple",
+        "price": "1.99",
+        "count": "5"
+      },
+      {
+        "id":"2",
+        "name": "Banana",
+        "price": ".99",
+        "count": "2"
+      },
+      {
+        "id":"3",
+        "name": "Kale",
+        "price": "3.99",
+        "count": "1"
+      },
+      {
+        "id":"4",
+        "name": "Broccoli",
+        "price": "2.77",
+        "count": "4"
+      },
+      {
+        "id":"5",
+        "name": "Onions",
+        "price": ".50",
+        "count": "6"
+      },
+      {
+        "id":"6",
+        "name": "Chicken Breast",
+        "price": "8.99",
+        "count": "11"
+      },
+      {
+        "id":"7",
+        "name": "Striploin Steak",
+        "price": "7.59",
+        "count": "4"
+      },
+      {
+        "id":"8",
+        "name": "Cheese Wheel",
+        "price": "5.99",
+        "count": "3"
+      },
+      {
+        "id":"9",
+        "name": "Olive Oil",
+        "price": "1.99",
+        "count": "1"
+      },
+      {
+        "id":"10",
+        "name": "Salt",
+        "price": ".19",
+        "count": "44"
+      },
+      {
+        "id":"11",
+        "name": "Rice",
+        "price": "6.99",
+        "count": "7"
+      }
+    ]
+  }
