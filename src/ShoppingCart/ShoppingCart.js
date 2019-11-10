@@ -11,7 +11,7 @@ class ShoppingCart extends Component {
         <h1>Shopping Cart</h1>
         {this.props.items.map((item,index) => {
             return(
-            <p id={index}>{item.name} <span> x {item.quantity}</span></p>
+            <p key={index}>{item.name} <span> x {item.quantity}</span></p>
             )
         })}
       </div>
