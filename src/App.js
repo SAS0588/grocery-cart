@@ -27,7 +27,7 @@ class App extends Component {
       store: data.inventory,
       itemsBought: [],
       subtotal: '0.00',
-      tax: '0.00',
+      tax: '.0968',
       total: '0.00'
     }
   }
@@ -35,73 +35,39 @@ class App extends Component {
   increaseClickHandler = (e) => {
     const tempItem = { ...this.state.store.find((thing) => e.target.id === thing.id) }; //item that's clicked on
     const tempShoppingCart = [...this.state.itemsBought]; //what's in the shopping cart
-    //let quantity = 0; //set quantity to 1
     let tempItemBought;
-
     // Check to see if this item has already been added.
     const indexOfPreviouslyAddedItem = tempShoppingCart.findIndex(item => item.id === tempItem.id); // find index of item in shopping cart. if true returns index, if false returns -1;
-    console.log(indexOfPreviouslyAddedItem);
-    if (indexOfPreviouslyAddedItem != -1){ // if item is found
-      // increase quantity value
-      console.log(tempShoppingCart[indexOfPreviouslyAddedItem].quantity++);
-      tempItemBought = {id: tempItem.id, name: tempItem.name, quantity: tempShoppingCart[indexOfPreviouslyAddedItem].quantity++, price: tempItem.price}; // create object
-      tempShoppingCart.splice(indexOfPreviouslyAddedItem,1,tempItemBought); // remove previous object and replace it with the new object
+    if (indexOfPreviouslyAddedItem !== -1){ // if item is found
+      tempShoppingCart[indexOfPreviouslyAddedItem].quantity++;
     } else {
       tempItemBought = {id: tempItem.id, name: tempItem.name, quantity: 1, price: tempItem.price}; // create object
+      tempShoppingCart.push(tempItemBought); // push object to index
     }
-    /* tempShoppingCart.forEach(itemQuantity => {
-      if (itemQuantity.id === tempItem.id){
-        quantity++
-      }
-    }); */
-    console.log(tempItemBought);
-    console.log(tempShoppingCart);
-    tempShoppingCart.push(tempItemBought);
     this.setState(() => ({ itemsBought: tempShoppingCart }));
-    /* if (tempShoppingCart.length !== 0) {
-      tempItemBought = tempShoppingCart.reduce((acc, currentValue) => {
-        if (currentValue.id === tempItem.id) {
-          acc = { id: tempItem.id, name: tempItem.name, quantity: (currentValue.quantity + 1), price: tempItem.price };
-          console.log('duplicate item: ' + acc);
-          return acc;
-        } else {
-          acc = { id: tempItem.id, name: tempItem.name, quantity: 1, price: tempItem.price }
-          console.log('first item: ' + acc);
-          return acc;
-        }
-      }, [])
-    } else {
-      tempItemBought = { id: tempItem.id, name: tempItem.name, quantity: 1, price: tempItem.price };
-    }
-    // else if statement for shopping cart is empty
-    console.log(tempItemBought);
-    tempShoppingCart.push(tempItemBought);
-    this.setState(() => ({ itemsBought: tempShoppingCart })); */
-
-
-    /*
-    
-
-    tempShoppingCart.push(tempItemBought);
-    console.log(tempShoppingCart);
-    this.setState(() => ({itemsBought: tempShoppingCart}));
-    */
+    this.subtotalHandler(tempShoppingCart);
   }
 
   decreaseClickHandler = (e) => {
-    const tempItem = {
-      ...this.state.store.find((thing) => {
-        return e.target.id === thing.id;
-      })
-    };
+    const tempItem = {...this.state.store.find(thing => e.target.id === thing.id)};
     const tempShoppingCart = [...this.state.itemsBought];
     const indexOfDeletedItem = tempShoppingCart.findIndex(item => item.id === tempItem.id);
-    console.log(indexOfDeletedItem);
+    
     if (indexOfDeletedItem !== -1) {
-      tempShoppingCart.splice(indexOfDeletedItem, 1);
+      tempShoppingCart[indexOfDeletedItem].quantity -= 1;
+      if (tempShoppingCart[indexOfDeletedItem].quantity === 0){
+        tempShoppingCart.splice(indexOfDeletedItem, 1);
+      }
       console.log(tempShoppingCart);
       this.setState(() => ({ itemsBought: tempShoppingCart }));
     }
+  }
+
+  subtotalHandler = (data) => {
+    const tempSubTotal = data.reduce((acc,currentValue) => { return acc + (currentValue.quantity * currentValue.price)},0);
+    this.setState(() => ({subtotal: tempSubTotal}));
+    console.log('tempSubTotal: ' + tempSubTotal);
+    this.totalHandler(tempSubTotal);
   }
 
   render() {
