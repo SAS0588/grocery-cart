@@ -1,23 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './ShoppingCart.css'
 
 
-class ShoppingCart extends Component {
-  
-  render(){
-    //console.log(this.props.items);
-    return(
-      <div className='ShoppingCartReceipt'>
-        <h1>Shopping Cart</h1>
-        {this.props.items.map((item,index) => {
-            return(
-            <p key={index}>{item.name} <span> x {item.quantity}</span></p>
-            )
-        })}
-      </div>
-    )
-      
-}
-}
+const ShoppingCart = props => (
+  <div className='ShoppingCartReceipt'>
+    <h1>Shopping Cart</h1>
+      {props.items.map((item,index) => {
+        return(
+          <p key={index}>{item.name} <span> x {item.quantity} @ {item.price}</span></p>
+        )
+      })}
+  </div>
+);
 
 export default ShoppingCart;

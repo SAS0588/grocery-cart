@@ -27,7 +27,7 @@ class App extends Component {
       store: data.inventory,
       itemsBought: [],
       subtotal: '0.00',
-      tax: '.0968',
+      tax: '0.00',
       total: '0.00'
     }
   }
@@ -58,16 +58,28 @@ class App extends Component {
       if (tempShoppingCart[indexOfDeletedItem].quantity === 0){
         tempShoppingCart.splice(indexOfDeletedItem, 1);
       }
-      console.log(tempShoppingCart);
       this.setState(() => ({ itemsBought: tempShoppingCart }));
     }
+    this.subtotalHandler(tempShoppingCart);
   }
 
   subtotalHandler = (data) => {
-    const tempSubTotal = data.reduce((acc,currentValue) => { return acc + (currentValue.quantity * currentValue.price)},0);
-    this.setState(() => ({subtotal: tempSubTotal}));
-    console.log('tempSubTotal: ' + tempSubTotal);
-    this.totalHandler(tempSubTotal);
+    let tempSubTotal = 0;
+    tempSubTotal = data.reduce((acc,currentValue) => { return acc + (currentValue.quantity * currentValue.price)},0);
+    this.setState(() => ({subtotal: tempSubTotal.toFixed(2)}));
+    this.taxHandler(tempSubTotal);
+  }
+
+  taxHandler = (subTotalData) => {
+    const taxRate = .0968;
+    const tempTax = (subTotalData * taxRate);
+    this.setState(()=>({tax: tempTax.toFixed(2)}));
+    this.totalHandler(subTotalData, tempTax);
+  }
+
+  totalHandler = (subTotal,tax) => {
+    const tempTotal = (tax + subTotal).toFixed(2);
+    this.setState(() => ({total: tempTotal}));
   }
 
   render() {

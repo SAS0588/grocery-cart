@@ -1,18 +1,13 @@
 import React, {Component} from 'react';
 import '../storefront/StoreDisplay.css';
 
-class StoreDisplay extends Component {
+const StoreDisplay = props => (
+  <div className="items-display">
+    <p>{props.itemsInStock.name}</p> 
+    <img className='icons' src={props.plus} alt="plus" onClick={props.increase} id={props.itemsInStock.id} />
+    <img className="icons" src={props.minus} alt="minus" onClick={props.decrease} id={props.itemsInStock.id} />
+</div>
+)
 
-  render(){
-    return(
-      <div className="items-display">
-        <p>{this.props.itemsInStock.name}</p> 
-        <img className='icons' src={this.props.plus} alt="plus" onClick={this.props.increase} id={this.props.itemsInStock.id} />
-        <img className="icons" src={this.props.minus} alt="minus" onClick={this.props.decrease} id={this.props.itemsInStock.id} />
-      </div>
-    )
-      
-}
-}
 
 export default StoreDisplay;

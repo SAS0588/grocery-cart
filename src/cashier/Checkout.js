@@ -16,21 +16,12 @@ I’d suggest setting up a JSON file with your “inventory”, with just a few 
 
 
 
-
-
-class Checkout extends Component {
- 
-
-  render(){
-    return(
-      <div>
-        <h3>subtotal: <span>{this.props.sub}</span></h3>
-        <h3>tax: <span>{this.props.t}</span></h3>
-        <h3>total: <span>{this.props.tot}</span></h3>
-      </div>
-    )
-      
-}
-}
+const Checkout = props => (
+  <div>
+    <h3>subtotal: <span>{props.sub}</span></h3>
+    <h3>tax: <span>{props.t}</span></h3>
+    <h3>total: <span>{props.tot}</span></h3>
+  </div>
+)
 
 export default Checkout;
